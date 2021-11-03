@@ -7,8 +7,10 @@ using namespace Geometry;
 int main(int argc, char **argv) {
   // Torus centered at the origin, symmetric about the z axis
   double R = 5.0, r = 2.0;
-  // double theta = 0.765, phi = 0.435; // "random" point on the torus
-  double theta = M_PI / 2, phi = 0;
+  double theta = 0.765, phi = 0.435; // "random" point on the torus
+  // double theta = M_PI / 2, phi = 0;  // top
+  // double theta = 0, phi = 0;         // outside
+  // double theta = M_PI, phi = 0;      // inside
   Point3D q((R + r * cos(theta)) * cos(phi),
             (R + r * cos(theta)) * sin(phi),
             r * sin(theta));
@@ -85,19 +87,21 @@ int main(int argc, char **argv) {
     std::cout << std::endl;
   }
   std::cout << "Sample point: " << q << std::endl;
-  std::cout << "Function value [0]: "
+  std::cout << "Function value: "
             << f(q) << std::endl;
   std::cout << "Normal vector: " << g.normalized() << std::endl;
-  std::cout << "Mean curvature [" << (1 / R + 1 / r) / 2 << "]: "
+  std::cout << "Mean curvature: "
             << ImplicitCurvature::mean(g, h) << std::endl;
-  std::cout << "Gaussian curvature [" << 1 / (R * r) << "]: "
+  std::cout << "Gaussian curvature: "
             << ImplicitCurvature::gaussian(g, h) << std::endl;
   auto [kmin, kmax] = ImplicitCurvature::principal(g, h);
-  std::cout << "Principal curvatures [" << 1 / R << ", " << 1 / r << "]: "
+  std::cout << "Principal curvatures: "
             << kmin << ", " << kmax << std::endl;
   auto [dmin, dmax] = ImplicitCurvature::directions(g, h);
   std::cout << "Principal directions: "
             << dmin << " / " << dmax << std::endl;
+
+  std::cout << q + dmin << "\n" << q + dmax << std::endl;
 
   return 0;
 }

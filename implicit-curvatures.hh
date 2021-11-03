@@ -43,7 +43,9 @@ namespace ImplicitCurvature {
   std::pair<Vector3D, Vector3D> directions(const Vector3D &gradient, const Matrix3x3 &hessian) {
     // Choose an arbitrary (u,v) system in the tangent plane
     Vector3D n = gradient.normalized();
-    size_t i = n[0] < n[1] ? (n[0] < n[2] ? n[0] : n[2]) : (n[1] < n[2] ? n[1] : n[2]);
+    size_t i = std::abs(n[0]) < std::abs(n[1])
+      ? (std::abs(n[0]) < std::abs(n[2]) ? 0 : 2)
+      : (std::abs(n[1]) < std::abs(n[2]) ? 1 : 2);
     Vector3D tmp(0, 0, 0); tmp[i] = 1.0;
     Vector3D u = (n ^ tmp).normalize();
     Vector3D v = (n ^ u).normalize();
