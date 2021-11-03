@@ -7,7 +7,7 @@ Uses my [geometry library](https://github.com/salvipeter/libgeom/).
 
 ## Usage
 
-See the API in the header file, and also the test program.
+See the API in the header file, and also the test program (needs my [dual contouring library](https://github.com/salvipeter/dual-contouring)).
 
 Note that the curvature is only defined in regular points;
 the program will likely crash when the gradient vanishes.
