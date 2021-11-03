@@ -7,10 +7,12 @@ Uses my [geometry library](https://github.com/salvipeter/libgeom/).
 
 ## Usage
 
-See the API in the header file.
+See the API in the header file, and also the test program.
 
 Note that the curvature is only defined in regular points;
 the program will likely crash when the gradient vanishes.
+
+![image](torus.png "Torus with normal and principal directions")
 
 ## References
 
