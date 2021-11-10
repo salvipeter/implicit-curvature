@@ -18,7 +18,7 @@ int main(int argc, char **argv) {
   // Evaluation
   auto f = [=](const Point3D &p) {
     double d = p[0] * p[0] + p[1] * p[1] + p[2] * p[2] + R * R - r * r;
-    return 4 * R * R * (p[0] * p[0] + p[1] * p[1]) - d * d;
+    return d * d - 4 * R * R * (p[0] * p[0] + p[1] * p[1]);
   };
 
   // Write surface
@@ -34,36 +34,36 @@ int main(int argc, char **argv) {
 
   // Derivatives
   auto fx = [=](const Point3D &p) {
-    return -4.0 * p[0] * (p[0] * p[0] + p[1] * p[1] + p[2] * p[2] + R * R - r * r)
-      + 8 * R * R * p[0];
+    return 4.0 * p[0] * (p[0] * p[0] + p[1] * p[1] + p[2] * p[2] + R * R - r * r)
+      - 8 * R * R * p[0];
   };
   auto fy = [=](const Point3D &p) {
-    return -4.0 * p[1] * (p[0] * p[0] + p[1] * p[1] + p[2] * p[2] + R * R - r * r)
-      + 8 * R * R * p[1];
+    return 4.0 * p[1] * (p[0] * p[0] + p[1] * p[1] + p[2] * p[2] + R * R - r * r)
+      - 8 * R * R * p[1];
   };
   auto fz = [=](const Point3D &p) {
-    return -4.0 * p[2] * (p[0] * p[0] + p[1] * p[1] + p[2] * p[2] + R * R - r * r);
+    return 4.0 * p[2] * (p[0] * p[0] + p[1] * p[1] + p[2] * p[2] + R * R - r * r);
   };
   auto fxx = [=](const Point3D &p) {
-    return -4.0 * (p[0] * p[0] + p[1] * p[1] + p[2] * p[2] + R * R - r * r)
-      - 8 * (p[0] * p[0] - R * R);
+    return 4.0 * (p[0] * p[0] + p[1] * p[1] + p[2] * p[2] + R * R - r * r)
+      + 8 * (p[0] * p[0] - R * R);
   };
   auto fyy = [=](const Point3D &p) {
-    return -4.0 * (p[0] * p[0] + p[1] * p[1] + p[2] * p[2] + R * R - r * r)
-      - 8 * (p[1] * p[1] - R * R);
+    return 4.0 * (p[0] * p[0] + p[1] * p[1] + p[2] * p[2] + R * R - r * r)
+      + 8 * (p[1] * p[1] - R * R);
   };
   auto fzz = [=](const Point3D &p) {
-    return -4.0 * (p[0] * p[0] + p[1] * p[1] + p[2] * p[2] + R * R - r * r)
-      - 8 * p[2] * p[2];
+    return 4.0 * (p[0] * p[0] + p[1] * p[1] + p[2] * p[2] + R * R - r * r)
+      + 8 * p[2] * p[2];
   };
   auto fxy = [=](const Point3D &p) {
-    return -8 * p[0] * p[1];
+    return 8 * p[0] * p[1];
   };
   auto fxz = [=](const Point3D &p) {
-    return -8 * p[0] * p[2];
+    return 8 * p[0] * p[2];
   };
   auto fyz = [=](const Point3D &p) {
-    return -8 * p[1] * p[2];
+    return 8 * p[1] * p[2];
   };
 
   // Gradient & Hessian

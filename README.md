@@ -20,3 +20,4 @@ the program will likely crash when the gradient vanishes.
 - [Notes on the curvature tensor (Lehmann & Reif, 2012)](https://doi.org/10.1016/j.gmod.2012.04.003)
 - [Computational Assessment of Curvatures and Principal Directions of Implicit Surfaces from 3D Scalar Data (Albin et al., 2017)](https://doi.org/10.1007/978-3-319-67885-6_1)
 
+See also my [writeup on this](https://github.com/salvipeter/weingarten/).

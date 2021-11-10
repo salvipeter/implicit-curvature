@@ -20,10 +20,10 @@ namespace ImplicitCurvature {
   // Implementation //
   ////////////////////
 
-  // Goldman (2005) - equal to (Fuu + Fvv) / (-2 |Fn|)
+  // Goldman (2005) - equal to (Fuu + Fvv) / (2 |Fn|)
   double mean(const Vector3D &gradient, const Matrix3x3 &hessian) {
     double g2 = gradient.normSqr();
-    return (gradient * (hessian * gradient) - g2 * hessian.trace()) / (2 * std::pow(g2, 1.5));
+    return (g2 * hessian.trace() - gradient * (hessian * gradient)) / (2 * std::pow(g2, 1.5));
   }
 
   // Goldman (2005) - equal to (Fuu Fvv - Fuv^2) / Fn^2
@@ -56,10 +56,8 @@ namespace ImplicitCurvature {
     double Fuu = u * (hessian * u);
     double Fvv = v * (hessian * v);
 
-    auto [kmin0, kmax0] = principal(gradient, hessian);
+    auto [kmin, kmax] = principal(gradient, hessian);
 
-    // Flip the sign because Goldman uses the reverse orientation
-    double kmin = -kmax0, kmax = -kmin0;
     if (std::abs(kmin * Fn - Fuu) >= std::abs(kmin * Fn - Fvv)) {
       double k1 = kmin, k2 = kmax;
       Vector3D t1 = u * Fuv + v * (k1 * Fn - Fuu);
